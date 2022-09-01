@@ -6,21 +6,30 @@ const Message = ({ user }) => {
 
   return (
     <div className="msgs">
-      {messages.length > 0 ? (
-        messages.map((el, index) => (
-          <div key={index}>
+      <main className="msger-chat">
+        {messages.length > 0 ? (
+          messages.map((el, index) => (
             <div
+              className={`msg ${
+                el.userr.id === user.id ? "right-msg" : "left-msg"
+              }`}
               key={index}
-              className={`msg ${el.userr.id === user.id ? "sent" : "received"}`}
             >
-              <img src={el.userr.avatar_url} alt="" />
-              <p>{el.text}</p>
+              <img className="msg-img" src={el.userr.avatar_url} alt="user" />
+
+              <div className="msg-bubble">
+                <div className="msg-info">
+                  <div className="msg-info-name">{el.userr.login}</div>
+                </div>
+
+                <div className="msg-text">{el.text}</div>
+              </div>
             </div>
-          </div>
-        ))
-      ) : (
-        <h3 style={{ textAlign: "center" }}>No Messages to show</h3>
-      )}
+          ))
+        ) : (
+          <h3 style={{ textAlign: "center" }}>No Messages to show</h3>
+        )}
+      </main>
     </div>
   );
 };

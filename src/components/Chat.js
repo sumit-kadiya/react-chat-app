@@ -34,52 +34,32 @@ const Chat = () => {
   };
 
   return (
-    <div>
-      <div className="navcon">
+    <section className="msger">
+      <header className="msger-header">
         {filteredUser && (
-          <h2 style={{ margin: 0 }}>
+          <div className="msger-header-title">
             Hello {filteredUser.login.toUpperCase()} !
-          </h2>
+          </div>
         )}
-        <button onClick={handleLogout}>Log out</button>
-      </div>
+        <div className="msger-header-options">
+          <button onClick={handleLogout}>Log out</button>
+        </div>
+      </header>
       <Message user={filteredUser} />
 
-      <form onSubmit={submitMessageHandler}>
-        <div className="sendMsg">
-          <input
-            style={{
-              width: "78%",
-              fontSize: "15px",
-              fontWeight: "550",
-              marginLeft: "5px",
-              borderRadius: "20px",
-            }}
-            placeholder="Message..."
-            type="text"
-            value={msg}
-            onChange={(e) => setMsg(e.target.value)}
-          />
-          <button
-            style={{
-              width: "15%",
-              fontSize: "15px",
-              fontWeight: "550",
-              margin: "5px",
-              padding: " 10px 5px",
-              maxWidth: "200px",
-              border: "none",
-              borderRadius: "20px",
-              backgroundColor: "#eb4034",
-              color: "#fff",
-            }}
-            type="submit"
-          >
-            Send
-          </button>
-        </div>
+      <form className="msger-inputarea" onSubmit={submitMessageHandler}>
+        <input
+          type="text"
+          className="msger-input"
+          placeholder="Enter your message..."
+          value={msg}
+          onChange={(e) => setMsg(e.target.value)}
+        />
+        <button type="submit" className="msger-send-btn">
+          Send
+        </button>
       </form>
-    </div>
+    </section>
   );
 };
 
