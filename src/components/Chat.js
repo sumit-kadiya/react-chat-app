@@ -3,10 +3,10 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useGlobalContext } from "../store/userContext";
 import { userActions } from "../store/userSlice";
-import { Button } from "@mui/material";
 
 const Chat = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const messages = useSelector((state) => state.user.messages);
   const [msg, setMsg] = useState("");
 
@@ -34,11 +34,14 @@ const Chat = () => {
 
   return (
     <div>
-      {filteredUser && (
-        <h3 style={{ textAlign: "center" }}>
-          Hello {filteredUser.login.toUpperCase()} !
-        </h3>
-      )}
+      <div className="navcon">
+        {filteredUser && (
+          <h2 style={{ margin: 0 }}>
+            Hello {filteredUser.login.toUpperCase()} !
+          </h2>
+        )}
+        <button onClick={() => navigate("/")}>Log out</button>
+      </div>
 
       <div className="msgs">
         {messages.length > 0 ? (

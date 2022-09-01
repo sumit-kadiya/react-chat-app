@@ -90,6 +90,25 @@ p {
   width: 50%;
   border-radius: 5px;
 }
+.navcon {
+  height: 60px;
+  background-color: #395dff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.navcon button {
+  padding: 5px 15px;
+  border: 1px solid white;
+  background-color: transparent;
+  color: #fafafa;
+  font-size: 20px;
+  height: 60%;
+  margin-right: 15px;
+}
+.navcon h2 {
+  color: #fafafa;
+}
 
 @media (max-width: 775px) {
   p {
