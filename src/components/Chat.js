@@ -9,10 +9,10 @@ const Chat = () => {
   const [msg, setMsg] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { user } = useParams();
+  const { userID } = useParams();
   const { users } = useGlobalContext();
 
-  const [filteredUser] = users.filter((el) => el.id === Number(user));
+  const [filteredUser] = users.filter((el) => el.id === Number(userID));
 
   const submitMessageHandler = (e) => {
     e.preventDefault();
@@ -28,6 +28,11 @@ const Chat = () => {
     setMsg("");
   };
 
+  const handleLogout = () => {
+    dispatch(userActions.logout());
+    navigate("/");
+  };
+
   return (
     <div>
       <div className="navcon">
@@ -36,7 +41,7 @@ const Chat = () => {
             Hello {filteredUser.login.toUpperCase()} !
           </h2>
         )}
-        <button onClick={() => navigate("/")}>Log out</button>
+        <button onClick={handleLogout}>Log out</button>
       </div>
       <Message user={filteredUser} />
 

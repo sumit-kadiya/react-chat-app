@@ -1,19 +1,25 @@
 import React, { useState } from "react";
 import { useGlobalContext } from "../store/userContext";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { userActions } from "../store/userSlice";
 
 const Login = () => {
   const [user, setUser] = useState("");
   let navigate = useNavigate();
+  const dispatch = useDispatch();
   const { users, alertMsg } = useGlobalContext();
 
   const submitHandler = (e) => {
     e.preventDefault();
     const [currentUser] = users.filter((el) => el.login === user) || [];
     if (currentUser && user === currentUser.login) {
+      dispatch(userActions.login());
       navigate(`/${currentUser.id}`);
-    } else if (!currentUser) {
-      alert("Invalid User");
+    } else if (user === "") {
+      alert("Please enter username");
+    } else {
+      alert("Invalid user");
     }
   };
   return (
