@@ -4,7 +4,7 @@ const UserContext = createContext();
 
 function UserProvider({ children }) {
   const [users, setUsers] = useState([]);
-  const [alert, setAlert] = useState("");
+  const [alertMsg, setAlert] = useState("");
 
   useEffect(() => {
     fetch("https://api.github.com/users")
@@ -17,14 +17,13 @@ function UserProvider({ children }) {
         console.log(userData);
       })
       .catch((error) => {
-        setUsers([]);
         console.log(error.message);
       });
   }, []);
 
   const userContext = {
     users,
-    alert,
+    alertMsg,
   };
 
   return (

@@ -1,22 +1,18 @@
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useGlobalContext } from "../store/userContext";
 import { userActions } from "../store/userSlice";
+import Message from "./Message";
 
 const Chat = () => {
+  const [msg, setMsg] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const messages = useSelector((state) => state.user.messages);
-  const [msg, setMsg] = useState("");
-
   const { user } = useParams();
-  // console.log(user);
   const { users } = useGlobalContext();
-  // console.log(users);
 
   const [filteredUser] = users.filter((el) => el.id === Number(user));
-  // console.log(filteredUser);
 
   const submitMessageHandler = (e) => {
     e.preventDefault();
@@ -42,26 +38,8 @@ const Chat = () => {
         )}
         <button onClick={() => navigate("/")}>Log out</button>
       </div>
+      <Message user={filteredUser} />
 
-      <div className="msgs">
-        {messages.length > 0 ? (
-          messages.map((el, index) => (
-            <div key={index}>
-              <div
-                key={index}
-                className={`msg ${
-                  el.userr.id === filteredUser.id ? "sent" : "received"
-                }`}
-              >
-                <img src={el.userr.avatar_url} alt="" />
-                <p>{el.text}</p>
-              </div>
-            </div>
-          ))
-        ) : (
-          <h3 style={{ textAlign: "center" }}>No Messages to show</h3>
-        )}
-      </div>
       <form onSubmit={submitMessageHandler}>
         <div className="sendMsg">
           <input

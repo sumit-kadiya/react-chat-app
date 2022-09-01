@@ -5,17 +5,12 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
   const [user, setUser] = useState("");
   let navigate = useNavigate();
-
-  const { users, alert } = useGlobalContext();
-
-  // console.log(users);
-  // console.log(currentUser);
+  const { users, alertMsg } = useGlobalContext();
 
   const submitHandler = (e) => {
     e.preventDefault();
     const [currentUser] = users.filter((el) => el.login === user) || [];
     if (currentUser && user === currentUser.login) {
-      console.log("Success");
       navigate(`/${currentUser.id}`);
     } else if (!currentUser) {
       alert("Invalid User");
@@ -23,7 +18,7 @@ const Login = () => {
   };
   return (
     <div className="log-con">
-      {alert === "Not Found" ? (
+      {alertMsg === "Not Found" ? (
         <h2>Server is not Responding</h2>
       ) : (
         <form className="form-con" onSubmit={submitHandler}>
