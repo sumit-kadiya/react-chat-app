@@ -25,7 +25,7 @@ const Home = () => {
   return (
     <div className="login-page">
       <div className="form">
-        {alertMsg === "Not Found" ? (
+        {alertMsg ? (
           <h2>Server is not Responding</h2>
         ) : (
           <form className="login-form" onSubmit={submitHandler}>
