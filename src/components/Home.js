@@ -23,16 +23,6 @@ const Home = () => {
     }
   };
   return (
-    // <div className="log-con">
-    //   {alertMsg === "Not Found" ? (
-    //     <h2>Server is not Responding</h2>
-    //   ) : (
-    //     <form className="form-con" onSubmit={submitHandler}>
-    //       <h2>React Chat-Room</h2>
-
-    //     </form>
-    //   )}
-    // </div>
     <div className="login-page">
       <div className="form">
         {alertMsg === "Not Found" ? (
