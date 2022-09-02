@@ -29,10 +29,12 @@ const Chat = () => {
   return (
     <section className="msger">
       <header className="msger-header">
-        {currentUser && (
+        {currentUser ? (
           <div className="msger-header-title">
-            Hello {currentUser.login.toUpperCase()} !
+            Hello {currentUser?.login.toUpperCase()} !
           </div>
+        ) : (
+          <></>
         )}
         <div className="msger-header-options">
           <button onClick={handleLogout}>Log out</button>

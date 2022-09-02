@@ -17,7 +17,7 @@ function UserProvider({ children }) {
         console.log(userData);
       })
       .catch((error) => {
-        console.log(error.message);
+        console.log(error);
       });
   }, []);
 

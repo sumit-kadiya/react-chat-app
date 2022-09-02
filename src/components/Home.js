@@ -12,8 +12,8 @@ const Home = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    const [currentUser] = users.filter((el) => el.login === user) || [];
-    if (currentUser && user === currentUser.login) {
+    const [currentUser] = users.filter((el) => el.login === user.toLowerCase());
+    if (currentUser && user.toLowerCase() === currentUser.login) {
       dispatch(userActions.login(currentUser));
       navigate(`/${currentUser.id}`);
     } else if (user === "") {
@@ -35,7 +35,7 @@ const Home = () => {
               type="text"
               placeholder="username"
               value={user}
-              onChange={(e) => setUser(e.target.value.toLowerCase())}
+              onChange={(e) => setUser(e.target.value)}
             />
             <button>Log-In</button>
           </form>
