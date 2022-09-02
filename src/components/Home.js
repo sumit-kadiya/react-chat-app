@@ -14,7 +14,7 @@ const Home = () => {
     e.preventDefault();
     const [currentUser] = users.filter((el) => el.login === user) || [];
     if (currentUser && user === currentUser.login) {
-      dispatch(userActions.login());
+      dispatch(userActions.login(currentUser));
       navigate(`/${currentUser.id}`);
     } else if (user === "") {
       alert("Please enter username");

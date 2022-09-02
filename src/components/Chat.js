@@ -1,18 +1,12 @@
 import React, { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { useGlobalContext } from "../store/userContext";
+import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../store/userSlice";
 import Message from "./Message";
 
 const Chat = () => {
   const [msg, setMsg] = useState("");
+  const currentUser = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const { userID } = useParams();
-  const { users } = useGlobalContext();
-
-  const [filteredUser] = users.filter((el) => el.id === Number(userID));
 
   const submitMessageHandler = (e) => {
     e.preventDefault();
@@ -21,7 +15,7 @@ const Chat = () => {
     }
     dispatch(
       userActions.sendMessage({
-        userr: filteredUser,
+        userr: currentUser,
         text: msg,
       })
     );
@@ -30,22 +24,21 @@ const Chat = () => {
 
   const handleLogout = () => {
     dispatch(userActions.logout());
-    navigate("/");
   };
 
   return (
     <section className="msger">
       <header className="msger-header">
-        {filteredUser && (
+        {currentUser && (
           <div className="msger-header-title">
-            Hello {filteredUser.login.toUpperCase()} !
+            Hello {currentUser.login.toUpperCase()} !
           </div>
         )}
         <div className="msger-header-options">
           <button onClick={handleLogout}>Log out</button>
         </div>
       </header>
-      <Message user={filteredUser} />
+      <Message />
 
       <form className="msger-inputarea" onSubmit={submitMessageHandler}>
         <input

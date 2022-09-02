@@ -1,8 +1,9 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-const Message = ({ user }) => {
+const Message = () => {
   const messages = useSelector((state) => state.user.messages);
+  const user = useSelector((state) => state.user.user);
 
   return (
     <div className="msgs">
