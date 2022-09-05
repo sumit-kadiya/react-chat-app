@@ -1,10 +1,9 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
+import { useGlobalContext } from "../store/userContext";
 
 const PrivateRoute = ({ children }) => {
-  const isAuth = useSelector((state) => state.user.isAuth);
-
+  const { isAuth } = useGlobalContext();
   if (!isAuth) {
     return <Navigate to="/" />;
   }

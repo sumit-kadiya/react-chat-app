@@ -1,43 +1,37 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { userActions } from "../store/userSlice";
+import { useGlobalContext } from "../store/userContext";
 import Message from "./Message";
 
 const Chat = () => {
   const [msg, setMsg] = useState("");
-  const currentUser = useSelector((state) => state.user.user);
-  const dispatch = useDispatch();
+  const { user, sendMessage, logoutHandler } = useGlobalContext();
 
   const submitMessageHandler = (e) => {
     e.preventDefault();
     if (msg.length === 0) {
       return;
     }
-    dispatch(
-      userActions.sendMessage({
-        userr: currentUser,
-        text: msg,
-      })
-    );
-    setMsg("");
-  };
 
-  const handleLogout = () => {
-    dispatch(userActions.logout());
+    sendMessage({
+      userr: user,
+      text: msg,
+    });
+
+    setMsg("");
   };
 
   return (
     <section className="msger">
       <header className="msger-header">
-        {currentUser ? (
+        {user ? (
           <div className="msger-header-title">
-            Hello {currentUser?.login.toUpperCase()} !
+            Hello {user?.login.toUpperCase()} !
           </div>
         ) : (
           <></>
         )}
         <div className="msger-header-options">
-          <button onClick={handleLogout}>Log out</button>
+          <button onClick={logoutHandler}>Log out</button>
         </div>
       </header>
       <Message />

@@ -1,20 +1,18 @@
 import React, { useState } from "react";
 import { useGlobalContext } from "../store/userContext";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { userActions } from "../store/userSlice";
 
 const Home = () => {
   const [user, setUser] = useState("");
   let navigate = useNavigate();
-  const dispatch = useDispatch();
-  const { users, alertMsg } = useGlobalContext();
+  const { users, alertMsg, loginHandler } = useGlobalContext();
 
   const submitHandler = (e) => {
     e.preventDefault();
     const [currentUser] = users.filter((el) => el.login === user.toLowerCase());
     if (currentUser && user.toLowerCase() === currentUser.login) {
-      dispatch(userActions.login(currentUser));
+      loginHandler(currentUser);
+
       navigate(`/${currentUser.id}`);
     } else if (user === "") {
       alert("Please enter username");

@@ -1,9 +1,8 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useGlobalContext } from "../store/userContext";
 
 const Message = () => {
-  const messages = useSelector((state) => state.user.messages);
-  const user = useSelector((state) => state.user.user);
+  const { user, messages } = useGlobalContext();
 
   return (
     <div className="msgs">
